@@ -1,0 +1,9 @@
+{
+    "java.test.config": {
+        "name": "myConfiguration",
+        "workingDirectory": "${workspaceFolder}/src/main",
+        "args": [],
+        "vmargs": []
+    },
+    "java.test.defaultConfig": "myConfiguration"
+}
