@@ -49,11 +49,18 @@ public class ReservationSystem {
         Scanner scanner = new Scanner(standardInput);
         try {
             while (true) {
-                standardOutput.println(SEPERATOR);
-                Action action = promptAction(scanner);
-                Flight flight = promptFlight(flights, scanner);
-                performAction(action, flight, scanner);
-                standardOutput.println();
+                try {
+                    standardOutput.println(SEPERATOR);
+                    Action action = promptAction(scanner);
+                    Flight flight = promptFlight(flights, scanner);
+                    performAction(action, flight, scanner);
+                    standardOutput.println();
+                } catch (ExitException e) {
+                    throw e;
+                } catch (Exception ex) {
+                    standardOutput.println("An error has occurred. Please try again.");
+                }
+;
             }
         } catch (ExitException e) {
             standardOutput.println(e.getMessage());
@@ -167,6 +174,14 @@ public class ReservationSystem {
                                   .append("2. Return a ticket\n")
                                   .append("3. View flight info\n")
                                   .append("0. Exit").toString();
+    }
+
+    private Integer tryGetInteger(Scanner scanner) {
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (Exception e) {
+            return -1;
+        }
     }
 
 }
