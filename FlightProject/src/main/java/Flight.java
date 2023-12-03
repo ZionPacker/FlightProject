@@ -10,6 +10,14 @@ public final class Flight {
     private final LinkedList<Ticket> availableTickets;
     private final ArrayList<Ticket> purchasedTickets;
 
+    /**
+     * Creates a new flight with the given name, date, time, and number of seats.
+     * @param flightName The name of the flight.
+     * @param date The date of the flight.
+     * @param time The time of the flight.
+     * @param numSeats The number of seats available for this flight.
+     */
+
     public Flight(String flightName, String date, String time, int numSeats) {
         this.name = flightName;
         this.date = date;
@@ -22,6 +30,11 @@ public final class Flight {
         }
     }
 
+    /**
+     * Purchases a ticket for this flight.
+     * @return A ticket for this flight.
+     * @throws AllTicketsSoldException If there are no more tickets available for this flight.
+     */
     public Ticket purchaseTicket() throws AllTicketsSoldException {
         if (availableTickets.isEmpty()) {
             throw new AllTicketsSoldException("All tickets sold for flight departing at " + this.time + " on " + this.date);
@@ -31,6 +44,10 @@ public final class Flight {
         return t;
     }
 
+    /**
+     * Returns a ticket for this flight.
+     * @param ticket The ticket to return.
+     */
     public void returnTicket(Ticket ticket) {
         purchasedTickets.remove(ticket);
         availableTickets.addFirst(ticket);
@@ -48,6 +65,10 @@ public final class Flight {
                "Available Seats: " + availableTickets.size();
     }
 
+    /**
+     * Returns a string that can be used as a header for the flight (for selection).
+     * @return The flight header formatted as `name at date time`.
+     */
     public String getFlightHeader() {
         return name + " @ " + date + " " + time;
     }
