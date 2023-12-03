@@ -34,6 +34,19 @@ public class ReservationSystemTest {
     }
 
     @Test
+    public void testStartUnexpectedResponse() {
+        String input = "rawr\n0"; // Simulate user input: Reserve a ticket for the first flight
+        rs.standardInput = new ByteArrayInputStream(input.getBytes());
+        rs.start();
+        String output = stdOut.toString();
+        // Print out what was printed to Console for testing only.
+        System.out.println(output);
+        int i = output.indexOf("An error has occurred. Please try again.");
+        assertNotEquals(-1, i, "Output should contain error message");
+        assertNotEquals(-1, output.indexOf("Thank you for using the Flight Reservation System!", i), "Output should contain thank you message");
+    }
+
+    @Test
     public void testStartReserveOne() {
         String input = "1\n1\n0"; // Simulate user input: Reserve a ticket for the first flight
         rs.standardInput = new ByteArrayInputStream(input.getBytes());
