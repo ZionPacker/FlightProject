@@ -6,6 +6,7 @@ public class FlightTest {
     private Flight flight;
 
     @BeforeEach
+    // This method is run before each test
     public void setUp() {
         flight = new Flight("Test Flight", "2022-12-31", "12:00", 2);
     }
